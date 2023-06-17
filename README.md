@@ -1,20 +1,13 @@
-# Amazon_Sentiment_Analysis
-
 Sentiment Analysis on Amazon Electronics Products Review Dataset
 Binay Oli, Hao Zhang, Saheb Singh Johar1
 1 Harrisburg University
                                                                                                                                                     
  
- 
- 
- 
- 
- 
 Author note
-Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
-Enter author note here.
 The authors made the following contributions. Binay Oli, Hao Zhang, Saheb Singh Johar: Conceptualization, Writing - Original Draft Preparation, Writing - Review & Editing.
-Correspondence concerning this article should be addressed to Binay Oli, Hao Zhang, Saheb Singh Johar, 326 Market St. Harrisburg, PA 17101. E-mail: boli1@my.harrisburgu.edu
+Special Thanks to Dr. Ying Lin for his support throughout the project.
+Presentation Video Link - CISC 520   Presentation Final +recordings V2
+Correspondence concerning this article should be addressed to Binay Oli, Hao Zhang, Saheb Singh Johar, 326 Market St. Harrisburg, PA 17101. E-mail: boli1@my.harrisburgu.edu, hzhang29@my.harrisburgu.edu, sjohar@my.harrisburgu.edu
 Abstract
 The project “Sentiment Analysis of Amazon Reviews” was aimed at analyzing customer sentiment expressed in Amazon reviews using machine learning techniques. A diverse dataset of Amazon reviews across various product categories was collected, and thorough preprocessing and cleaning were performed to prepare the data for analysis. By leveraging machine learning algorithms, a sentiment analysis model was developed to automatically classify the sentiment of the reviews as positive, negative, or neutral. The sentiment of the reviews was accurately predicted for approximately 62.5% and 87% of the reviews by the logistic regression model and DistillBert model, respectively, achieving accuracy scores of 0.625 and 0.87. Valuable insights into customer sentiment were provided by the project, with positive and negative sentiment trends being identified, and correlations between sentiment and various review attributes being uncovered. Future work includes the improvement of the model’s accuracy, the expansion of analysis to other e-commerce platforms, the incorporation of aspect-based sentiment analysis, the implementation of real-time sentiment monitoring, and the integration of sentiment insights into business decision-making processes.
 Keywords: Sentiment Analysis, Amazon Reviews, Customer Sentiment, Machine Learning Techniques, Diverse Dataset, Preprocessing, Cleaning, Sentiment Classification, Logistic Regression Model, DistillBert Model, Accuracy Score
@@ -34,7 +27,9 @@ Data Collection.
 Electronics are very popular on all e-commerce platforms. This is the area of our current focus. The Amazon Electronics Review Dataset from TensorFlow dataset was used for this project. The overall project plan was to clean up the review dataset, apply machine learning and deep learning algorithms to perform sentiment analysis and classify reviews for electronic products.
 EDA on Target variable.
 First, an extensive EDA (Exploratory Data Analysis) was employed to discover the features within the dataset. Rating field is the target variable in this project. A visualization of the entire dataset is presented below.
+
 Researching the ratings online, it made sense to classify any rating that was greater or equal to 3 as positive and any rating less than 3 as negative.
+ 
 Then, we mapped the positive label as 1 and the negative label as 0. The dataset was imbalanced and proved to be very computationally expensive for fine-tuning deep learning algorithms.
 To alleviate the computational constraint, the data was cleaned up to create a well-balanced dataset while preserving all the features. During the data exploration analysis, 2000 records of positive reviews and 2000 records of negative reviews were generated as input.
 EDA on Features.
@@ -49,17 +44,34 @@ Model 1: Logistic Regression Model.
 For this model, the best practices of Natural Language Processing are followed.
 ● Lowercasing - all the text was converted to lowercase to ensure that the model treats words with different capitalization the same. This step prevents the model from considering “Good” and “good” as different words. ● Tokenization - This step helps in breaking down the text into smaller units, enabling further analysis on a per-word basis. ● Remove stopwords - Stopwords such as “a”, “an”, “the”, etc. which have very little semantic meaning were removed from the text which helps in reducing noise and focuses on more important words in the analysis. ● Lemmatization/Stemming - this technique was applied to reduce the words into their base form. Lemmatization maps words to their dictionary form while Stemming reduces words to their truncated form by removing prefixes and suffixes. ● Remove emoji symbols - emojis which were present in the text were removed. Even though emojis can convey sentiments, for the purpose of this study, only the textual element of the review was considered. This helped maintain consistency in the textual analysis.
 The review text structures are very complex. The traditional machine learning method produces an above average performance. From the below, it can be seen that the accuracy score of the Logistic Regression model was only 0.625.
+
+
 Model 2: Fine-Tuning DistillBert model.
 For Model 2, we took full advantage of the pretrained open source transformer model and tensorflow framework. In particular, we used DistillBert for tokenization and for fine-tuning practice to better achieve our own specific task. The tokenization and loading pretrained DistillBert setup are presented below.
-Fine-tuning transformer models raised a few concerns ● Dedicate learning rate on the order of 1E-05 ● Fine-tuning process can be computationally expensive To this end, we fine-tuned the DistillBert model using two epochs with a learning rate of 5E-05 and Adamax as model optimizer.
+
+Fine-tuning transformer models raised a few concerns 
+● Dedicate learning rate on the order of 1E-05 
+● Fine-tuning process can be computationally expensive. 
+To this end, we fine-tuned the DistillBert model using two epochs with a learning rate of 5E-05 and Adamax as model optimizer.
+
+ 
 The model performed very well with a modest fine-tuning. The main reason is due to the vast source of large corpus used to train transformer models.
 Two demonstration tests were presented with our fine-tuned Bert model for illustration purposes on the model performance.
+ 
+
 Integration of GPT-4.
-Large Language Models (LLM) are the most trending topic recently. We have explored the surface of leveraging LLM to perform sentiment analysis by providing a crafted prompt text. The prompt we used is as follows: “‘Perform sentiment analysis on the input delimited by triple quote and return the result in JSON format with two keys. One key is the input review text and another key is classification result, either positive or negative’”
-A few trials were conducted. Two test results were recorded. The first test showed LLM is on par with the previous generation Transformers model. The second test LLM achieved 100% accuracy. Using LLM in production is still early. More research will be needed.
+Large Language Models (LLM) are the most trending topic recently. We have explored the surface of leveraging LLM to perform sentiment analysis by providing a crafted prompt text. The prompt we used is as follows:
+ “‘Perform sentiment analysis on the input delimited by triple quote and return the result in JSON format with two keys. One key is the input review text and another key is classification result, either positive or negative’”
+A few trials were conducted. Two test results were recorded using selected sample reviews. The first test showed LLM is on par with the previous generation Transformers model. The second test LLM achieved 100% accuracy. Using LLM in production is still early. More research will be needed.
 Results
 In this study, we looked at the Amazon Electronics Review Dataset and performed Sentiment analysis on it using the Logistic Regression Model and DistillBert Model. We also used GPT-4 integration to calculate the sentiment scores of the model.
-We then converted the positive label to 1 and negative label to 0 for evaluation. The table below shows the accuracy of each of these models.
+We then converted the positive label to 1 and negative label to 0 for evaluation. Table 1 below shows the accuracy of each of these models.
+Table 1 - Table Showing Models and their Accuracy
+Models	Accuracy Score	Comment
+Logistic Regression Model	0.62	Worst Performing Model
+DistillBert Model	0.87	Useable Model
+GPT-4 Integration	1.00	Most accurate model obtained by using a very limited sample size. GPT does show its inconsistency performance
+
 From the above, it can be observed that the Logistic Regression Model had the lowest accuracy while the GPT-4 had the best accuracy. However, as the GPT-4 integration was applied on a very limited sample size, we have decided to overlook the model. Thus, from this study, the best model is the DistillBert model with an accuracy of 0.87.
 Discussion
 One of the main reasons that Logistic Regression performance is shadowed by Distillbert is the way that treatment of negation stopwords during the NLP preprocess stage.
@@ -74,3 +86,12 @@ References
 Aust, F., & Barth, M. (2022). papaja: Prepare reproducible APA journal articles with R Markdown. Retrieved from https://github.com/crsh/papaja
 Barth, M. (2022). tinylabels: Lightweight variable labels. Retrieved from https://cran.r-project.org/package=tinylabels
 R Core Team. (2021). R: A language and environment for statistical computing. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from https://www.R-project.org/
+Analytics Vidhya. (2021, June). Amazon Product Review Sentiment Analysis using BERT. Retrieved from https://www.analyticsvidhya.com/blog/2021/06/amazon-product-review-sentiment-analysis-using-bert/
+TensorFlow. (n.d.). Retrieved from https://www.tensorflow.org/
+Hugging Face. (n.d.). DistilBERT - Base Uncased. Retrieved from https://huggingface.co/distilbert-base-uncased
+Sahoo, S. (2021, May 18). Hugging Face DistilBERT + TensorFlow for Custom Text Classification. Medium. Retrieved from https://medium.com/geekculture/hugging-face-distilbert-tensorflow-for-custom-text-classification-1ad4a49e26a7
+Hugging Face. (n.d.). DistilBERT. Retrieved from https://huggingface.co/docs/transformers/model_doc/distilbert
+OpenAI. (n.d.). Retrieved from https://openai.com/
+Stack Overflow. (n.d.). Retrieved from https://stackoverflow.com/
+Oli, B., Zhang, H., & Johar, S.S. Sentiment Analysis on Amazon electronics Dataset. Retrieved from https://www.youtube.com/watch?v=TMhs26prb38
+
